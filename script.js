@@ -1,5 +1,5 @@
 // Initialize interactive features
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     initializeTooltips();
     initializeAIImpactViewer();
     animateMetrics();
@@ -14,45 +14,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Framework filtering functionality
 function initializeFrameworkFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const frameworkRows = document.querySelectorAll('.framework-table tbody tr');
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const frameworkRows = document.querySelectorAll(".framework-table tbody tr");
 
     filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener("click", () => {
             // Update active button state
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+            filterButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
 
-            const filter = button.getAttribute('data-filter');
+            const filter = button.getAttribute("data-filter");
 
             // Filter table rows
             frameworkRows.forEach(row => {
-                if (filter === 'all' || row.getAttribute('data-category') === filter) {
-                    row.style.display = '';
+                if (filter === "all" || row.getAttribute("data-category") === filter) {
+                    row.style.display = "";
                     // Add fade-in animation
-                    row.style.animation = 'fadeIn 0.5s ease-in forwards';
+                    row.style.animation = "fadeIn 0.5s ease-in forwards";
                 } else {
-                    row.style.display = 'none';
+                    row.style.display = "none";
                 }
             });
         });
     });
 
     // Initialize progress bars
-    const progressBars = document.querySelectorAll('.progress');
+    const progressBars = document.querySelectorAll(".progress");
     progressBars.forEach(bar => {
-        const progress = bar.style.getPropertyValue('--progress');
-        bar.style.setProperty('--progress', progress);
+        const progress = bar.style.getPropertyValue("--progress");
+        bar.style.setProperty("--progress", progress);
     });
 }
 
 // Animate executive metrics
 function animateMetrics() {
-    const metrics = document.querySelectorAll('.metric-value');
+    const metrics = document.querySelectorAll(".metric-value");
     metrics.forEach((metric, index) => {
         setTimeout(() => {
-            metric.style.opacity = '1';
-            metric.style.transform = 'translateY(0)';
+            metric.style.opacity = "1";
+            metric.style.transform = "translateY(0)";
         }, index * 200);
     });
 }
@@ -62,20 +62,20 @@ function initializeAutoScroll() {
     let scrollPosition = 0;
     let isScrolling = false;
     let scrollInterval;
-    const container = document.querySelector('.container');
+    const container = document.querySelector(".container");
     const scrollHeight = container.scrollHeight + 200; // More padding to ensure we capture everything
     const viewportHeight = window.innerHeight;
     scrollPosition = -50; // Start slightly above the top
     window.scrollTo(0, scrollPosition); // Ensure we start above the top
 
     // Create scroll control button
-    const controlBtn = document.createElement('button');
-    controlBtn.innerHTML = '<i class="fas fa-play"></i> Auto-Scroll';
-    controlBtn.className = 'control-btn scroll-control';
-    controlBtn.style.position = 'fixed';
-    controlBtn.style.bottom = '20px';
-    controlBtn.style.right = '20px';
-    controlBtn.style.zIndex = '1000';
+    const controlBtn = document.createElement("button");
+    controlBtn.innerHTML = "<i class=\"fas fa-play\"></i> Auto-Scroll";
+    controlBtn.className = "control-btn scroll-control";
+    controlBtn.style.position = "fixed";
+    controlBtn.style.bottom = "20px";
+    controlBtn.style.right = "20px";
+    controlBtn.style.zIndex = "1000";
     document.body.appendChild(controlBtn);
 
     // Function to trigger interactions based on scroll position
@@ -86,11 +86,11 @@ function initializeAutoScroll() {
 
     function triggerInteractions() {
         // Get all interactive elements
-        const techCards = document.querySelectorAll('.tech-card');
-        const roiBars = document.querySelectorAll('.roi-bar');
-        const maturityLevels = document.querySelectorAll('.maturity-level');
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const impactItems = document.querySelectorAll('.impact-item');
+        const techCards = document.querySelectorAll(".tech-card");
+        const roiBars = document.querySelectorAll(".roi-bar");
+        const maturityLevels = document.querySelectorAll(".maturity-level");
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const impactItems = document.querySelectorAll(".impact-item");
 
         // Calculate which elements are in view
         const viewportHeight = window.innerHeight;
@@ -100,13 +100,13 @@ function initializeAutoScroll() {
         techCards.forEach(card => {
             const rect = card.getBoundingClientRect();
             if (rect.top < viewportHeight * 0.8 && rect.bottom > 0) {
-                const requirements = card.querySelector('.tech-requirements');
-                requirements.style.maxHeight = requirements.scrollHeight + 'px';
-                requirements.style.opacity = '1';
+                const requirements = card.querySelector(".tech-requirements");
+                requirements.style.maxHeight = requirements.scrollHeight + "px";
+                requirements.style.opacity = "1";
             } else {
-                const requirements = card.querySelector('.tech-requirements');
-                requirements.style.maxHeight = '0';
-                requirements.style.opacity = '0';
+                const requirements = card.querySelector(".tech-requirements");
+                requirements.style.maxHeight = "0";
+                requirements.style.opacity = "0";
             }
         });
 
@@ -114,7 +114,7 @@ function initializeAutoScroll() {
         roiBars.forEach(bar => {
             const rect = bar.getBoundingClientRect();
             if (rect.top < viewportHeight * 0.8 && rect.bottom > 0) {
-                bar.classList.add('animate');
+                bar.classList.add("animate");
             }
         });
 
@@ -123,13 +123,13 @@ function initializeAutoScroll() {
             const rect = level.getBoundingClientRect();
             if (rect.top < viewportHeight * 0.8 && rect.bottom > 0) {
                 setTimeout(() => {
-                    level.classList.add('active');
+                    level.classList.add("active");
                 }, index * 150);
             }
         });
 
         // Handle framework comparison section
-        const filterSection = document.querySelector('.framework-comparison');
+        const filterSection = document.querySelector(".framework-comparison");
         if (filterSection) {
             const rect = filterSection.getBoundingClientRect();
             const isFullyVisible = rect.top >= 0 && rect.bottom <= viewportHeight;
@@ -152,8 +152,8 @@ function initializeAutoScroll() {
             if (!isInFrameworkSection || (currentTime - lastFilterChangeTime >= FILTER_CHANGE_DELAY)) {
                 isInFrameworkSection = true;
                 lastFilterChangeTime = currentTime;
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                filterButtons[currentFilterIndex].classList.add('active');
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                filterButtons[currentFilterIndex].classList.add("active");
                 filterButtons[currentFilterIndex].click();
                 currentFilterIndex++;
             }
@@ -166,9 +166,9 @@ function initializeAutoScroll() {
         impactItems.forEach(item => {
             const rect = item.getBoundingClientRect();
             if (rect.top < viewportHeight * 0.8 && rect.bottom > 0) {
-                item.classList.add('active');
+                item.classList.add("active");
             } else {
-                item.classList.remove('active');
+                item.classList.remove("active");
             }
         });
 
@@ -178,7 +178,7 @@ function initializeAutoScroll() {
     function startScroll() {
         if (!isScrolling) {
             isScrolling = true;
-            controlBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+            controlBtn.innerHTML = "<i class=\"fas fa-pause\"></i> Pause";
             
             // Start with a pause at the top
             setTimeout(() => {
@@ -218,12 +218,12 @@ function initializeAutoScroll() {
     function stopScroll() {
         if (isScrolling) {
             isScrolling = false;
-            controlBtn.innerHTML = '<i class="fas fa-play"></i> Auto-Scroll';
+            controlBtn.innerHTML = "<i class=\"fas fa-play\"></i> Auto-Scroll";
             clearInterval(scrollInterval);
         }
     }
 
-    controlBtn.addEventListener('click', () => {
+    controlBtn.addEventListener("click", () => {
         if (isScrolling) {
             stopScroll();
         } else {
@@ -232,43 +232,43 @@ function initializeAutoScroll() {
     });
 
     // Stop scrolling when user manually scrolls
-    window.addEventListener('wheel', stopScroll);
-    window.addEventListener('touchmove', stopScroll);
+    window.addEventListener("wheel", stopScroll);
+    window.addEventListener("touchmove", stopScroll);
 }
 
 // Tooltip functionality for AI/ML impacts
 function initializeTooltips() {
-    const aiImpactElements = document.querySelectorAll('.ai-impact');
+    const aiImpactElements = document.querySelectorAll(".ai-impact");
     aiImpactElements.forEach(element => {
-        element.addEventListener('mouseenter', showTooltip);
-        element.addEventListener('mouseleave', hideTooltip);
+        element.addEventListener("mouseenter", showTooltip);
+        element.addEventListener("mouseleave", hideTooltip);
     });
 }
 
 function showTooltip(event) {
-    const tooltip = event.target.querySelector('.tooltip');
+    const tooltip = event.target.querySelector(".tooltip");
     if (tooltip) {
-        tooltip.style.display = 'block';
+        tooltip.style.display = "block";
     }
 }
 
 function hideTooltip(event) {
-    const tooltip = event.target.querySelector('.tooltip');
+    const tooltip = event.target.querySelector(".tooltip");
     if (tooltip) {
-        tooltip.style.display = 'none';
+        tooltip.style.display = "none";
     }
 }
 
 
 // AI Impact viewer functionality
 function initializeAIImpactViewer() {
-    const aiSection = document.querySelector('.ai-ml-section');
+    const aiSection = document.querySelector(".ai-ml-section");
     if (aiSection) {
-        const impacts = aiSection.querySelectorAll('.impact-item');
+        const impacts = aiSection.querySelectorAll(".impact-item");
         impacts.forEach(impact => {
-            impact.addEventListener('click', () => {
-                impacts.forEach(i => i.classList.remove('active'));
-                impact.classList.add('active');
+            impact.addEventListener("click", () => {
+                impacts.forEach(i => i.classList.remove("active"));
+                impact.classList.add("active");
             });
         });
     }
@@ -276,7 +276,7 @@ function initializeAIImpactViewer() {
 
 // Cost Analysis Animations
 function initializeCostAnalysis() {
-    const roiBars = document.querySelectorAll('.roi-bar');
+    const roiBars = document.querySelectorAll(".roi-bar");
     
     // Animate ROI bars on scroll
     const observer = new IntersectionObserver((entries) => {
@@ -285,7 +285,7 @@ function initializeCostAnalysis() {
                 const bar = entry.target;
                 // Add animation class after a small delay for each bar
                 setTimeout(() => {
-                    bar.classList.add('animate');
+                    bar.classList.add("animate");
                 }, 200);
                 observer.unobserve(bar);
             }
@@ -300,31 +300,31 @@ function initializeCostAnalysis() {
     });
 
     // Add hover effects for cost items
-    const costItems = document.querySelectorAll('.cost-item');
+    const costItems = document.querySelectorAll(".cost-item");
     costItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            item.style.transform = 'scale(1.05)';
-            item.style.transition = 'transform 0.3s ease';
+        item.addEventListener("mouseenter", () => {
+            item.style.transform = "scale(1.05)";
+            item.style.transition = "transform 0.3s ease";
         });
-        item.addEventListener('mouseleave', () => {
-            item.style.transform = 'scale(1)';
+        item.addEventListener("mouseleave", () => {
+            item.style.transform = "scale(1)";
         });
     });
 }
 
 // Global Compliance Interactions
 function initializeGlobalCompliance() {
-    const regionCards = document.querySelectorAll('.region-card');
-    const overlapItems = document.querySelectorAll('.overlap-item');
+    const regionCards = document.querySelectorAll(".region-card");
+    const overlapItems = document.querySelectorAll(".overlap-item");
 
     // Region card hover effects
     regionCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-10px)';
-            card.style.transition = 'transform 0.3s ease';
+        card.addEventListener("mouseenter", () => {
+            card.style.transform = "translateY(-10px)";
+            card.style.transition = "transform 0.3s ease";
         });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
+        card.addEventListener("mouseleave", () => {
+            card.style.transform = "translateY(0)";
         });
     });
 
@@ -332,14 +332,14 @@ function initializeGlobalCompliance() {
 
 // Timeline Animations
 function initializeTimeline() {
-    const timelinePhases = document.querySelectorAll('.timeline-phase');
+    const timelinePhases = document.querySelectorAll(".timeline-phase");
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
                 }, index * 200);
                 observer.unobserve(entry.target);
             }
@@ -347,41 +347,41 @@ function initializeTimeline() {
     }, { threshold: 0.2 });
 
     timelinePhases.forEach(phase => {
-        phase.style.opacity = '0';
-        phase.style.transform = 'translateY(20px)';
-        phase.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        phase.style.opacity = "0";
+        phase.style.transform = "translateY(20px)";
+        phase.style.transition = "opacity 0.5s ease, transform 0.5s ease";
         observer.observe(phase);
     });
 }
 
 // Emerging Technology Interactions
 function initializeEmergingTech() {
-    const techCards = document.querySelectorAll('.tech-card');
+    const techCards = document.querySelectorAll(".tech-card");
     
     techCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            const requirements = card.querySelector('.tech-requirements');
-            requirements.style.maxHeight = requirements.scrollHeight + 'px';
-            requirements.style.opacity = '1';
+        card.addEventListener("mouseenter", () => {
+            const requirements = card.querySelector(".tech-requirements");
+            requirements.style.maxHeight = requirements.scrollHeight + "px";
+            requirements.style.opacity = "1";
         });
 
-        card.addEventListener('mouseleave', () => {
-            const requirements = card.querySelector('.tech-requirements');
-            requirements.style.maxHeight = '0';
-            requirements.style.opacity = '0';
+        card.addEventListener("mouseleave", () => {
+            const requirements = card.querySelector(".tech-requirements");
+            requirements.style.maxHeight = "0";
+            requirements.style.opacity = "0";
         });
     });
 }
 
 // Maturity Model Interactions
 function initializeMaturityModel() {
-    const maturityLevels = document.querySelectorAll('.maturity-level');
+    const maturityLevels = document.querySelectorAll(".maturity-level");
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
-                    entry.target.classList.add('active');
+                    entry.target.classList.add("active");
                 }, index * 150);
                 observer.unobserve(entry.target);
             }
@@ -393,11 +393,11 @@ function initializeMaturityModel() {
 
 // Recent updates highlighting
 function highlightRecentUpdates() {
-    const updates = document.querySelectorAll('.recent-update');
+    const updates = document.querySelectorAll(".recent-update");
     updates.forEach(update => {
-        update.classList.add('highlight');
+        update.classList.add("highlight");
         setTimeout(() => {
-            update.classList.remove('highlight');
+            update.classList.remove("highlight");
         }, 3000);
     });
 }
@@ -406,18 +406,18 @@ function highlightRecentUpdates() {
 function generateChecklist(framework) {
     const checklistItems = {
         CMMC: [
-            'Access Control',
-            'Asset Management',
-            'Audit and Accountability',
-            'Configuration Management',
-            'Identity and Authentication'
+            "Access Control",
+            "Asset Management",
+            "Audit and Accountability",
+            "Configuration Management",
+            "Identity and Authentication"
         ],
         NIST: [
-            'Identify',
-            'Protect',
-            'Detect',
-            'Respond',
-            'Recover'
+            "Identify",
+            "Protect",
+            "Detect",
+            "Respond",
+            "Recover"
         ]
     };
 
@@ -427,10 +427,10 @@ function generateChecklist(framework) {
 // AI/ML compliance assessment
 function assessAICompliance(framework) {
     const aiRequirements = {
-        transparency: ['Model documentation', 'Decision explanation'],
-        fairness: ['Bias testing', 'Equal treatment verification'],
-        security: ['Data protection', 'Model security'],
-        accountability: ['Audit trails', 'Human oversight']
+        transparency: ["Model documentation", "Decision explanation"],
+        fairness: ["Bias testing", "Equal treatment verification"],
+        security: ["Data protection", "Model security"],
+        accountability: ["Audit trails", "Human oversight"]
     };
 
     return aiRequirements;

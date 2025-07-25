@@ -1,0 +1,12 @@
+{
+  "name": "it-compliance-frameworks",
+  "version": "1.0.0",
+  "description": "Static dashboard for IT compliance frameworks.",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^9.32.0"
+  }
+}
